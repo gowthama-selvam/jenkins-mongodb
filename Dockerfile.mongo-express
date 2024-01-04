@@ -1,0 +1,5 @@
+# Use the official MongoDB Express image
+FROM mongo-express:latest
+
+# No additional customization needed in this example
+

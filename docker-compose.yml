@@ -1,0 +1,30 @@
+version: '3.1'
+
+services:
+
+  mymongo:
+    build:
+      context: .
+      dockerfile: Dockerfile.mongo
+    image: mongo
+    restart: always
+    hostname: mymongo
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: "root"
+      MONGO_INITDB_ROOT_PASSWORD: "123"
+
+  mongo-express:
+    build:
+      context: .
+      dockerfile: Dockerfile.mongo-express
+    image: mongo-express
+    restart: always
+    ports:
+      - 8090:8081
+    environment:
+      ME_CONFIG_MONGODB_SERVER: "mymongo"
+      ME_CONFIG_BASICAUTH_USERNAME: "admin"
+      ME_CONFIG_BASICAUTH_PASSWORD: "admin123"
+      ME_CONFIG_MONGODB_ADMINUSERNAME: "root"
+      ME_CONFIG_MONGODB_ADMINPASSWORD: "123"
+
